@@ -1,6 +1,6 @@
 # AI 法律解读技能
 
-`ai-law-analysis` 是一个面向 Codex 的可复用技能，用于系统解读人工智能法律、法规、草案、监管指南、行为准则和政策文件，并将规则转化为适用性判断、角色与监管分类、合规义务、业务影响和产品改造要求。
+`ai-law-analysis` 是一个基于 Agent Skills 目录格式编写、主要在 Codex 中开发和验证的可复用技能，用于系统解读人工智能法律、法规、草案、监管指南、行为准则和政策文件，并将规则转化为适用性判断、角色与监管分类、合规义务、业务影响和产品改造要求。其核心 `SKILL.md`、参考文件和模板也可以由支持 Agent Skills 格式的其他智能体使用。
 
 ## 主要能力
 
@@ -26,12 +26,22 @@ ai-law-analysis/
 └── CHANGELOG.md
 ```
 
-## 安装和使用
+## 兼容平台与安装方法
 
-将完整的 `ai-law-analysis` 文件夹复制到个人 Codex 技能目录，例如：
+下载或克隆本仓库后，请始终保留完整的 `ai-law-analysis` 文件夹。不同平台的安装位置如下。
+
+### Codex
+
+复制到个人 Codex 技能目录：
 
 ```text
 ~/.codex/skills/ai-law-analysis
+```
+
+Windows 默认用户目录的写法通常是：
+
+```text
+%USERPROFILE%\.codex\skills\ai-law-analysis
 ```
 
 然后在任务中调用：
@@ -40,7 +50,55 @@ ai-law-analysis/
 $ai-law-analysis
 ```
 
-请保留完整目录。部分任务需要按 `SKILL.md` 中的路由读取 `references/`，创建多工作表成果时还可能使用 `assets/` 中的模板。
+### Claude Code
+
+个人级安装：
+
+```text
+~/.claude/skills/ai-law-analysis
+```
+
+也可以安装到具体项目：
+
+```text
+<项目根目录>/.claude/skills/ai-law-analysis
+```
+
+安装后，Claude Code 会根据 `SKILL.md` 的名称和描述发现相关任务。参见 [Anthropic Agent Skills 文档](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)。
+
+### GitHub Copilot
+
+个人级安装：
+
+```text
+~/.copilot/skills/ai-law-analysis
+```
+
+也可以安装到具体仓库：
+
+```text
+<仓库根目录>/.github/skills/ai-law-analysis
+```
+
+GitHub Copilot 还支持 `.agents/skills/` 等兼容位置。参见 [GitHub Copilot Agent Skills 文档](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)。
+
+### Gemini CLI
+
+安装到项目级 Agent Skills 目录：
+
+```text
+<项目根目录>/.agents/skills/ai-law-analysis
+```
+
+启动 Gemini CLI 后，可以使用 `/skills` 检查是否已经发现该技能。参见 [Google Gemini CLI Agent Skills 指南](https://codelabs.developers.google.com/gemini-cli/how-to-create-agent-skills-for-gemini-cli)。
+
+## 兼容性说明
+
+- 本技能目前主要在 Codex 中开发和验证；其他平台的上述路径依据其 Agent Skills 文档列出，不代表所有功能均已完成逐平台回归测试；
+- `agents/openai.yaml` 是 Codex/OpenAI 的界面元数据，其他平台可以忽略；核心工作流位于 `SKILL.md`；
+- 部分任务需要按 `SKILL.md` 的路由读取 `references/`，创建多工作表成果时还可能使用 `assets/` 中的模板；
+- PDF、OCR、电子表格、联网检索和文件生成效果取决于目标平台实际提供的工具、权限和运行环境；
+- 对不支持 Agent Skills 自动发现机制的智能体，可以把 `SKILL.md` 作为项目指令，并按需提供 `references/` 和 `assets/`，但触发和文件路由可能需要人工完成。
 
 ## 法律与来源边界
 
@@ -61,3 +119,4 @@ $ai-law-analysis
 除非文件中另有明确说明，本仓库中的原创内容，包括 `SKILL.md`、`agents/`、`references/` 和 `assets/` 中的技能模板，依据 [MIT License](LICENSE) 开源。
 
 Copyright (c) 2026 ChenYu
+
