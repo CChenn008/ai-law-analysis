@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI法律解读技能"
+  short_description: "系统解读人工智能法律并生成可追溯、可落地、可复用的企业合规指引"
+  default_prompt: "使用 $ai-law-analysis 完整解读一份人工智能法律，并输出适用性判断、合规义务和业务改造清单。"
